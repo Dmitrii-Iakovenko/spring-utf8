@@ -1,18 +1,21 @@
 package com.example.springutf8;
 
+import org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.filter.CharacterEncodingFilter;
+
+import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
 @Configuration
 public class FiltersUTF8Config {
 
     @Bean
-    public CharacterEncodingFilter characterUTF8EncodingFilter() {
-        final CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
+    public OrderedCharacterEncodingFilter setUTF8OrderedCharacterEncodingFilter() {
+        var filter = new OrderedCharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        filter.setOrder(HIGHEST_PRECEDENCE);
+        return filter;
     }
 
 }
